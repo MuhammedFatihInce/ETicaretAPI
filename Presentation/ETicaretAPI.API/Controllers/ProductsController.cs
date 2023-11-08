@@ -1,4 +1,6 @@
-﻿using ETicaretAPI.Application.Abstraction;
+﻿
+using ETicaretAPI.Application.Repositories;
+using ETicaretAPI.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,18 +10,29 @@ namespace ETicaretAPI.API.Controllers
 	[ApiController]
 	public class ProductsController : ControllerBase
 	{
-		private readonly IProductService _productService;
+		readonly private IProductReadRepository _productReadRepository;
+		readonly private IProductWriteRepository _productWriteRepository;
 
-		public ProductsController(IProductService productService)
+		readonly private IOrderWriteRepository _orderWriteRepository;
+		readonly private IOrderReadRepository _orderReadRepository;
+
+		readonly private ICustomerWriteRepository _customerWriteRepository;
+
+		public ProductsController(IProductReadRepository productReadRepository, IProductWriteRepository productWriteRepository, IOrderWriteRepository orderWriteRepository, ICustomerWriteRepository customerWriteRepository, IOrderReadRepository orderReadRepository)
 		{
-			_productService = productService;
+			_productReadRepository = productReadRepository;
+			_productWriteRepository = productWriteRepository;
+			_orderWriteRepository = orderWriteRepository;
+			_customerWriteRepository = customerWriteRepository;
+			_orderReadRepository = orderReadRepository;
 		}
-
 		[HttpGet]
-		public IActionResult GetProducts()
+		public async Task Get()
 		{
-			var prdocts = _productService.GetProducts();
-			return Ok(prdocts);
+			Order order = await _orderReadRepository.GetByIdAsync("218fdfbe-f682-404d-b91a-54a9ca6c1d33");
+			order.Address = "İstanbul";
+			await _orderWriteRepository.SaveAsync();
 		}
+		
 	}
 }

@@ -5,24 +5,23 @@
 namespace ETicaretAPI.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class mig_3 : Migration
+    public partial class mig_2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Storage",
+            migrationBuilder.AddColumn<bool>(
+                name: "Showcase",
                 table: "Files",
-                type: "text",
-                nullable: false,
-                defaultValue: "");
+                type: "boolean",
+                nullable: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Storage",
+                name: "Showcase",
                 table: "Files");
         }
     }

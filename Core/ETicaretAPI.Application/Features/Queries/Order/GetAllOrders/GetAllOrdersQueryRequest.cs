@@ -1,11 +1,12 @@
-﻿using MediatR;
+﻿using ETicaretAPI.Application.Features.Queries.GetAllOrders;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ETicaretAPI.Application.Features.Queries.Order
+namespace ETicaretAPI.Application.Features.Queries.Order.GetAllOrders
 {
 	public class GetAllOrdersQueryRequest : IRequest<GetAllOrdersQueryResponse>
 	{

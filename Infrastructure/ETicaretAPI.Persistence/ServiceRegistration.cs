@@ -13,6 +13,7 @@ using ETicaretAPI.Domain.Entities.Identity;
 using ETicaretAPI.Application.Abstractions.Services.Authentications;
 using ETicaretAPI.Application.Abstractions.Services;
 using ETicaretAPI.Persistence.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace ETicaretAPI.Persistence
 {
@@ -29,7 +30,8 @@ namespace ETicaretAPI.Persistence
 				options.Password.RequireDigit = false;
 				options.Password.RequireLowercase = false;
 				options.Password.RequireUppercase = false;
-			}).AddEntityFrameworkStores<ETicaretAPIDbContext>();
+			}).AddEntityFrameworkStores<ETicaretAPIDbContext>()
+			.AddDefaultTokenProviders();
 
 			services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
 			services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
